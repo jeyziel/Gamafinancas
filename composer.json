@@ -1,0 +1,24 @@
+{
+    "name": "gama/financas",
+    "description": "Controle de finanças",
+    "authors": [
+        {
+            "name": "Jeyziel",
+            "email": "jeyziel_2101@hotmail.com"
+        }
+    ],
+    "require": {
+        "robmorgan/phinx": "^0.9.2",
+        "xtreamwayz/pimple-container-interop": "^1.0",
+        "aura/router": "3.1.0",
+        "zendframework/zend-diactoros": "1.3.10"
+    },
+    "autoload": {
+        "psr-4": {
+           "GAMAFin\\" : "./src"
+        }
+    },
+    "require-dev": {
+        "fzaninotto/faker": "^1.7"
+    }
+}
