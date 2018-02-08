@@ -1,15 +1,11 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jeyziel
- * Date: 23/01/18
- * Time: 18:43
- */
+<?php declare(strict_types=1);
 
 namespace GAMAFin\View;
 
+use Psr\Http\Message\ResponseInterface;
+use Zend\Diactoros\Response;
 
-class ViewRenderInterface
+interface ViewRenderInterface
 {
-
+    public function render(string $path, array $context = []) : ResponseInterface;
 }

@@ -14,6 +14,6 @@ use GAMAFin\ServiceContainerInterface;
 interface PluginInterface
 {
     public function register(
-    	ServiceContainerInterface $serviceContainer
+        ServiceContainerInterface $serviceContainer
     );
 }
