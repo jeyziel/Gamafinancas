@@ -8,5 +8,7 @@ interface RepositoryInterface
     public function all();
     public function find(int $id);
     public function create(array $data);
+    public function findByField($field, $value);
     public function delete($id);
+
 }

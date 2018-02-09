@@ -10,6 +10,7 @@ namespace GAMAFin\Plugin;
 
 
 use GAMAFin\Models\CategoryCost;
+use GAMAFin\Models\User;
 use GAMAFin\Repository\RepositoryFactory;
 use GAMAFin\ServiceContainerInterface;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -30,6 +31,9 @@ class DbPlugin implements PluginInterface
         $container->add('repository.factory', new RepositoryFactory());
         $container->addLazy('category-costs.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(CategoryCost::class);
+        });
+        $container->add('users.repository', function(ContainerInterface $container){
+           return $container->get('repository.factory')->factory(User::class);
         });
 
 

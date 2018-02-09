@@ -11,6 +11,8 @@ $app->get('/category-costs', function() use($app) {
     $repository = $app->service('category-costs.repository');
     $categories = $repository->all();
 
+    $user = $app->service('auth');
+
     $view = $app->service('view.renderer');
     return $view->render('category-costs/list', compact('categories'));
 }, 'category-costs.list');

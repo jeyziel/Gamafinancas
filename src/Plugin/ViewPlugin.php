@@ -3,6 +3,7 @@
 namespace GAMAFin\Plugin;
 
 use GAMAFin\ServiceContainerInterface;
+use GAMAFin\View\Twig\TwigGlobals;
 use GAMAFin\View\ViewRenderer;
 use Interop\Container\ContainerInterface;
 
@@ -15,6 +16,9 @@ class ViewPlugin implements PluginInterface
             $twig = new \Twig_Environment($load);
 
             $generator = $container->get('routing.generator');
+            $auth = $container->get('auth');
+
+            $twig->addExtension(new TwigGlobals($auth));
             $twig->addFunction(new \Twig_SimpleFunction('route',
                 function(string $name, array $param = []) use($generator){
                     return $generator->generate($name, $param);

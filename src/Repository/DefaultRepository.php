@@ -38,6 +38,11 @@ class DefaultRepository implements RepositoryInterface
         return $this->model->find((int)$id);
     }
 
+    public function findByField($field, $value)
+    {
+        return $this->model->where($field, '=', $value)->get();
+    }
+
     /**
      * @param array $data
      * @return Model

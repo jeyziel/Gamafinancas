@@ -10,16 +10,19 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+{% if Auth.check() %}
 <nav class="navbar navbar-default navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#app-navbar-collapse">
                 <span class="sr-only">Toggle Navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
+            </button>
+            <button>
+              
             </button>
 
             <a class="navbar-brand" href="#">
@@ -32,12 +35,13 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a>Olá Usuário</a></li>
-                <li><a href="kkkk">Logout</a></li>
+                <li><a>{{ Auth.user().getFullname() }}</a></li>
+                <li><a href="{{ route('auth.logout') }}">Logout</a></li>
             </ul>
         </div>
     </div>
 </nav>
+{% endif %}
 {% block content %}{% endblock %}
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 

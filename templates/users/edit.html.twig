@@ -11,10 +11,10 @@
                 </div>
 
                 <div class="panel-body">
-                    <form method="post" action="{{ route('category-costs.update', {'id' :category.id }) }}">
+                    <form method="post" action="{{ route('users.update', {'id' : user.id }) }}">
                         <label class="control-label">Nome</label>
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="Nome" name="name" value="{{ category.name }}">
+                            <input class="form-control" type="text" placeholder="Nome" name="first_name" value="{{ user.first_name }}">
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">
                             <span class="glyphicon glyphicon-floppy-disk"></span>
