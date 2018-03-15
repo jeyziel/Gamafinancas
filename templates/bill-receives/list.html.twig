@@ -7,7 +7,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Administração de categorias de custo
+                        Administração de Contas a receber
                     </h3>
                 </div>
 
@@ -15,7 +15,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="{{ route('category-costs.new') }}" class="btn btn-default">
+                            <a href="{{ route('bill-receives.new') }}" class="btn btn-default">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
                         </div>
@@ -31,22 +31,26 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 10px">#</th>
+                                    <th>Data Lanc.</th>
                                     <th>Nome</th>
+                                    <th>Valor</th>
                                     <th>Ações</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                {% for category in categories %}
+                                {% for bill in bills%}
                                     <tr>
-                                        <td>{{ category.id }}</td>
-                                        <td>{{ category.name }}</td>
+                                        <td>{{ bill.id }}</td>
+                                        <td>{{ bill.date_launch | date('d/m/Y') }}</td>
+                                        <td>{{ bill.name }}</td>
+                                        <td>{{ bill.value | number_format(2,',','.')}}</td>
                                         <td>
-                                            <a href="{{ route('bill-receives.edit', {'id' : category.id}) }}">
+                                            <a href="{{ route('bill-receives.edit', {'id' : bill.id}) }}">
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
                                             |
-                                            <a href="{{ route('category-costs.delete', {'id' : category.id}) }}" class="remove">
+                                            <a href="{{ route('bill-receives.delete', {'id' : bill.id}) }}" class="remove">
                                                 <span class="glyphicon glyphicon-remove"></span>
                                             </a>
                                         </td>

@@ -9,8 +9,10 @@
 namespace GAMAFin\Plugin;
 
 
+use GAMAFin\Models\BillReceives;
 use GAMAFin\Models\CategoryCost;
 use GAMAFin\Models\User;
+use GAMAFin\Models\BillPays;
 use GAMAFin\Repository\RepositoryFactory;
 use GAMAFin\ServiceContainerInterface;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -29,11 +31,21 @@ class DbPlugin implements PluginInterface
         $capsule->bootEloquent();
 
         $container->add('repository.factory', new RepositoryFactory());
+
         $container->addLazy('category-costs.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(CategoryCost::class);
         });
-        $container->add('users.repository', function(ContainerInterface $container){
+
+        $container->add('users.repository', function (ContainerInterface $container){
            return $container->get('repository.factory')->factory(User::class);
+        });
+
+        $container->add('bill-receives.repository', function (ContainerInterface $container) {
+           return $container->get('repository.factory')->factory(BillReceives::class);
+        });
+
+        $container->add('bill-pays.repository', function(ContainerInterface $container ) {
+            return $container->get('repository.factory')->factory(BillPays::class);
         });
 
 

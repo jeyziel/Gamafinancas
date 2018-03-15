@@ -14,6 +14,7 @@ use Zend\Diactoros\Response\SapiEmitter;
 class Application
 {
     private $serviceContainer;
+    private $befores = [];
 
     public function __construct(ServiceContainerInterface $serviceContainer)
     {
@@ -80,17 +81,22 @@ class Application
             $request = $request->withAttribute($key,$value);
         }
 
+        $result = $this->runBefores();
+        if($result) {
+            $this->emitResponse($result);
+            return;
+        }
+
         $callable = $route->handler;
 
         $response = $callable($request);
-
-        return $this->emitResponse($response);
+        $this->emitResponse($response);
     }
 
-    protected function emitResponse(ResponseInterface $response)
+    public function before(callable $callback) : Application
     {
-        $emmit = new SapiEmitter();
-        $emmit->emit($response);
+        array_push($this->befores, $callback);
+        return $this;
     }
 
     public function route(string $name, array $params = [])
@@ -107,5 +113,23 @@ class Application
     {
         return new RedirectResponse($path);
     }
+
+    protected function runBefores() : ?ResponseInterface
+    {
+        foreach ($this->befores as $before) {
+            $result = $before($this->service(ServerRequestInterface::class));
+            if($result instanceof ResponseInterface) {
+                return $result;
+            }
+        }
+        return null;
+    }
+
+    protected function emitResponse(ResponseInterface $response)
+    {
+        $emmit = new SapiEmitter();
+        $emmit->emit($response);
+    }
+
 
 }

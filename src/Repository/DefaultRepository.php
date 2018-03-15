@@ -79,4 +79,22 @@ class DefaultRepository implements RepositoryInterface
         $model->delete();
 
     }
+
+    public function findOneBy(array $search)
+    {
+        $queryBuilder = $this->model;
+
+        foreach($search as $field => $value) {
+            $queryBuilder = $queryBuilder->where($field, $value);
+        }
+
+        return $queryBuilder->firstOrFail();
+   
+    }
+
+    public function model()
+    {
+        return $this->model;
+    }
+
 }

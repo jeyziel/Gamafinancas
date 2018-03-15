@@ -11,8 +11,6 @@ $app->get('/users', function() use($app) {
     $repository = $app->service('users.repository');
     $users = $repository->all();
 
-
-
     $view = $app->service('view.renderer');
     return $view->render('users/list', compact('users'));
 }, 'users.list');
