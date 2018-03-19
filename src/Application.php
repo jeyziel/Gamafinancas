@@ -82,6 +82,7 @@ class Application
         }
 
         $result = $this->runBefores();
+
         if($result) {
             $this->emitResponse($result);
             return;
